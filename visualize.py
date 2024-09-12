@@ -30,7 +30,7 @@ xml_head = \
         <sampler type="ldsampler">
             <integer name="sampleCount" value="256"/>
         </sampler>
-        <film type="ldrfilm">
+        <film type="hdrfilm">
             <integer name="width" value="1600"/>
             <integer name="height" value="1200"/>
             <rfilter type="gaussian"/>
@@ -125,10 +125,10 @@ if __name__ == '__main__':
 
     from dataset import Dataset
     d = Dataset(root=root, dataset_name=dataset_name, 
-                        num_points=2048, split=split, random_rotation=False, load_name=True)
+                        num_points=2048, split=split, random_rotate=False, load_name=True)
     print("datasize:", d.__len__())
 
-    pts, lb, n = d[item]
+    pts, lb, n, file= d[item]
     print(pts.size(), pts.type(), lb.size(), lb.type(), n) 
     path = os.path.join(save_root, dataset_name + '_' + split + str(item) + '_' + str(n) + '.xml')
     mitsuba(pts.numpy(), path)
